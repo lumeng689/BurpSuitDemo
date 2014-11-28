@@ -1,5 +1,32 @@
 apply plugin: 'java'
 apply plugin: 'maven'
-apply plugin: 'jar'
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+apply plugin: 'jdepend'
+apply plugin: 'pmd'
+apply plugin: 'idea'
+
+checkstyle{
+    configFile = file('config/checkstyle/checkstyle-main.xml')
+}
 
 group = 'org.luapp'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    guavaVersion = '18.0'
+    junitVersion = '4.11'
+}
+
+dependencies {
+    compile(
+            "com.google.guava:guava:${guavaVersion}"
+    )
+
+    testCompile(
+            "junit:junit:${junitVersion}"
+    )
+}
